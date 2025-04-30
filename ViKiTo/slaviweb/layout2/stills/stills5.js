@@ -1,0 +1,10 @@
+img = new Array(6);
+img[0] ="stills/sl_red1.gif";
+img[1] ="stills/sl_red2.gif";
+img[2] ="stills/3mart_01.jpg";
+img[3] ="stills/3mart_02.jpg";
+img[4] ="stills/3mart_03.jpg";
+img[5] ="stills/3mart_04.jpg";
+img[6] ="stills/3mart_05.jpg";
+img[7] ="stills/3mart_06.jpg";
+document.stills5.src = img[parseInt(Math.round(Math.random()*7))];

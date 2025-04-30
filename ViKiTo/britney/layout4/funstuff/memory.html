@@ -1,0 +1,459 @@
+<html>
+
+
+<!-- Mirrored from victoriavm.tripod.com/britney/layout4/funstuff/memory.htm by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Feb 2025 12:23:19 GMT -->
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<meta name="Microsoft Border" content="none">
+<title>Games</title>
+</head>
+
+<script LANGUAGE="JavaScript1.1">
+<!-- Original:  Martin Webb (martin@irt.org) -->
+<!-- This script and many more are available free online at -->
+<!-- The JavaScript Source!! http://javascript.internet.com --><!-- Begin
+function right(e) {if (navigator.appName == 'Netscape' && 
+(e.which == 3 || e.which == 2))return false;
+else if (navigator.appName == 'Microsoft Internet Explorer' && 
+(event.button == 2 || event.button == 3)) {
+alert("Vicky's Britney Spears Site!");return false;}
+return true;}document.onmousedown=right;
+if (document.layers) window.captureEvents(Event.MOUSEDOWN);
+window.onmousedown=right;//  End --></script>
+<script LANGUAGE="JavaScript">
+
+
+<!--
+
+
+function newgame() {
+
+
+   document.k1.src = "puzzles/membg.html"
+
+
+   document.k2.src = "puzzles/membg.html"
+
+
+    document.k3.src = "puzzles/membg.html"
+
+
+    document.k4.src = "puzzles/membg.html"
+
+
+    document.k5.src = "puzzles/membg.html"
+
+
+    document.k6.src = "puzzles/membg.html"
+
+
+    document.k7.src = "puzzles/membg.html"
+
+
+    document.k8.src = "puzzles/membg.html"
+
+
+    document.k9.src = "puzzles/membg.html"
+
+
+    document.k10.src = "puzzles/membg.html"
+
+
+    document.k11.src = "puzzles/membg.html"
+
+
+    document.k12.src = "puzzles/membg.html"
+
+
+    document.k13.src = "puzzles/membg.html"
+
+
+    document.k14.src = "puzzles/membg.html"
+
+
+    document.k15.src = "puzzles/membg.html"
+
+
+    document.k0.src = "puzzles/membg.html"
+
+
+    document.tmpform.tmp.value = 0
+
+
+    document.tmpform.tmp2.value = 8
+
+
+    card1 = 99
+
+
+    card2 = 99
+
+
+    cardopen = 0
+
+
+    document.xform.kcount.value = 0
+
+
+}
+
+
+
+
+
+function help() {
+
+
+           alert("The game is called 'Britney Memory Game'.\n It is very simple to play, even little children can play the game. \n You click on a card, and a picture comes up.\n Then you click on a second card, and if it has the same picture as the first card they both will dissappear.\n If they are not similar, then they will turn 'backside up' again and you can click on some other cards.\n Continue like this until all cards have dissappeared.\n The point is to use as few clicks as possible.\n Good luck!\n\n              Vicky's Britney Spears Site\n              http://vickysbritney.hello.to")
+
+
+}
+
+
+
+
+
+// -->
+
+
+</script>
+<script LANGUAGE="JavaScript">
+
+
+<!--
+
+
+var kortnmr
+
+
+var cardopen = 0
+
+
+var card1 = null
+
+
+var card2 = null
+
+
+var clicks = 0
+
+
+var c = new MakeArray ();
+
+
+
+
+
+function toeval(low,high) {
+
+
+return (Math.floor(Math.random() * (high-low)) + low);
+
+
+}
+
+
+function MakeArray() {
+
+
+var total;
+
+
+var place1,place2;
+
+
+var sub;
+
+
+     this.length = 16;
+
+
+      for (var i = 1; i < 9; i++) {
+
+
+         this[i] = i;
+
+
+         this[17-i] = i;
+
+
+         }
+
+
+      total = toeval(30,100);
+
+
+      for (var i = 1; i < total; i++) {
+
+
+         place1 = toeval(1,17);
+
+
+         place2 = toeval(1,17);
+
+
+         sub = this[place1];
+
+
+         this[place1] = this[place2];
+
+
+         this[place2] = sub;
+
+
+      }
+
+
+return this;
+
+
+}
+
+
+
+
+
+function cardclick(kortnmr) {
+
+
+           if(document.images[kortnmr].src.substring((document.images[kortnmr].src.length-9),(document.images[kortnmr].src.length)) == "memwhite.html") {
+
+
+              window.status=''
+
+
+           }
+
+
+           else if(kortnmr == card1) {
+
+
+              window.status = ''
+
+
+           }
+
+
+           else {
+
+
+             if (cardopen == 0) {
+
+
+                  cardopen = 1
+
+
+                  bild = c[kortnmr + 1]
+
+
+                  document.images[kortnmr].src = "mem" + bild + ".gif"
+
+
+                  card1 = kortnmr
+
+
+                  b1 = document.images[kortnmr].src.substring((document.images[kortnmr].src.length-5),(document.images[kortnmr].src.length-4))
+
+
+                  document.tmpform.tmp.value = (eval(document.tmpform.tmp.value) + 1)
+
+
+                  document.xform.kcount.value = document.tmpform.tmp.value
+
+
+             }
+
+
+             else if (cardopen == 1) {
+
+
+                  cardopen = 2
+
+
+                  bild = c[kortnmr + 1]
+
+
+                  document.images[kortnmr].src = "mem" + bild + ".gif"
+
+
+                  card2 = kortnmr
+
+
+                  b2 = document.images[kortnmr].src.substring((document.images[kortnmr].src.length-5),(document.images[kortnmr].src.length-4))
+
+
+                  document.tmpform.tmp.value = (eval(document.tmpform.tmp.value) + 1)
+
+
+                  document.xform.kcount.value = document.tmpform.tmp.value
+
+
+             }
+
+
+           }
+
+
+}
+
+
+
+
+
+function resetimage(kortnmr) {
+
+
+          if (cardopen == 2) {
+
+
+               if (b1 == b2) {
+
+
+                   document.images[card1].src = "puzzles/memwhite.html"
+
+
+                   document.images[card2].src = "puzzles/memwhite.html"
+
+
+                   cardopen = 0
+
+
+                   if (document.tmpform.tmp2.value == 1) {
+
+
+                       alert("Congratulations!\n You have finished the game with " + document.tmpform.tmp.value + " clicks.\n Click on 'New game', if you want to play another game.")
+
+
+                       document.tmpform.tmp.value = 0
+
+
+                       document.tmpform.tmp2.value = 8
+
+
+                       c=new MakeArray ()
+
+
+                   }
+
+
+                   else {
+
+
+                       document.tmpform.tmp2.value = (document.tmpform.tmp2.value - 1)
+
+
+                   } 
+
+
+               }
+
+
+               else {
+
+
+                   document.images[card1].src = "puzzles/membg.html"
+
+
+                   document.images[card2].src = "puzzles/membg.html"
+
+
+                   card1 = 99 
+
+
+                   card2 = 99
+
+
+                   cardopen = 0
+
+
+               }
+
+
+          }
+
+
+}
+
+
+
+
+
+//-->
+
+
+</script>
+
+
+<body background="../images/back1.gif" bgcolor="#008000" link="#FFFFFF" vlink="#FFFFFF"
+alink="#FFFF00">
+<div align="center"><center>
+
+<table border="0" cellspacing="0" cellpadding="4" width="349">
+  <tr>
+    <td width="341" valign="top"><p align="center"><font face="Verdana" color="#FFFFFF"><strong><big><big>Britney
+    Memory Game</big></big></strong></font></td>
+  </tr>
+</table>
+</center></div>
+
+<form NAME="tmpform">
+  <input type="hidden" name="tmp" value="0"><input type="hidden" name="tmp2" value="8">
+</form>
+
+<p align="center"><font color="#FFFFFF" face="Verdana" size="2"><a
+HREF="JavaScript: newgame()">New Game</a></font><font color="#004000" face="Verdana"
+size="2"> || <a HREF="JavaScript:help()">Help</a></font><font color="#004000"><br>
+<font size="1" face="Verdana"><a NAME="top">After the page is fully loaded you can play
+offline.</a><br>
+<div align="center"><center>
+
+<table border="0" width="100%">
+  <tr>
+    <td align="center"><b><form NAME="xform">
+      <p></b></font></b><font face="Verdana" size="2">Clicks so far:</font><b><font SIZE="3"
+      FACE="Comic Sans MS"><b><input TYPE="text" VALUE="0" SIZE="4" NAME="kcount"> </b></font></b></p>
+    </form>
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><a HREF="JavaScript: cardclick(0)" onMouseOut="resetimage(0)"><img
+    SRC="puzzles/membg.html" BORDER="0" NAME="k0" width="90" height="90"></a> <a
+    HREF="JavaScript: cardclick(1)" onMouseOut="resetimage(1)"><img SRC="puzzles/membg.html"
+    BORDER="0" NAME="k1" width="90" height="90"></a> <a HREF="JavaScript: cardclick(2)"
+    onMouseOut="resetimage(2)"><img SRC="puzzles/membg.html" BORDER="0" NAME="k2" width="90"
+    height="90"></a> <a HREF="JavaScript: cardclick(3)" onMouseOut="resetimage(3)"><img
+    SRC="puzzles/membg.html" BORDER="0" NAME="k3" width="90" height="90"></a> <br>
+    <a HREF="JavaScript: cardclick(4)" onMouseOut="resetimage(4)"><img SRC="puzzles/membg.html"
+    BORDER="0" NAME="k4" width="90" height="90"></a> <a HREF="JavaScript: cardclick(5)"
+    onMouseOut="resetimage(5)"><img SRC="puzzles/membg.html" BORDER="0" NAME="k5" width="90"
+    height="90"></a> <a HREF="JavaScript: cardclick(6)" onMouseOut="resetimage(6)"><img
+    SRC="puzzles/membg.html" BORDER="0" NAME="k6" width="90" height="90"></a> <a
+    HREF="JavaScript: cardclick(7)" onMouseOut="resetimage(7)"><img SRC="puzzles/membg.html"
+    BORDER="0" NAME="k7" width="90" height="90"></a> <br>
+    <a HREF="JavaScript: cardclick(8)" onMouseOut="resetimage(8)"><img SRC="puzzles/membg.html"
+    BORDER="0" NAME="k8" width="90" height="90"></a> <a HREF="JavaScript: cardclick(9)"
+    onMouseOut="resetimage(9)"><img SRC="puzzles/membg.html" BORDER="0" NAME="k9" width="90"
+    height="90"></a> <a HREF="JavaScript: cardclick(10)" onMouseOut="resetimage(10)"><img
+    SRC="puzzles/membg.html" BORDER="0" NAME="k10" width="90" height="90"></a> <a
+    HREF="JavaScript: cardclick(11)" onMouseOut="resetimage(11)"><img SRC="puzzles/membg.html"
+    BORDER="0" NAME="k11" width="90" height="90"></a> <br>
+    <a HREF="JavaScript: cardclick(12)" onMouseOut="resetimage(12)"><img
+    SRC="puzzles/membg.html" BORDER="0" NAME="k12" width="90" height="90"></a> <a
+    HREF="JavaScript: cardclick(13)" onMouseOut="resetimage(13)"><img SRC="puzzles/membg.html"
+    BORDER="0" NAME="k13" width="90" height="90"></a> <a HREF="JavaScript: cardclick(14)"
+    onMouseOut="resetimage(14)"><img SRC="puzzles/membg.html" BORDER="0" NAME="k14" width="90"
+    height="90"></a> <a HREF="JavaScript: cardclick(15)" onMouseOut="resetimage(15)"><img
+    SRC="puzzles/membg.html" BORDER="0" NAME="k15" width="90" height="90"></a> </td>
+  </tr>
+</table>
+</center></div>
+
+<p align="center"><font face="Verdana" size="-2">All HTML and layout features are © <b>Vicky's
+Britney Spears Site</b><br>
+All Rights Reserved.</font></p>
+
+<p align="center">[an error occurred while processing this directive]</p>
+</body>
+
+<!-- Mirrored from victoriavm.tripod.com/britney/layout4/funstuff/memory.htm by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Feb 2025 12:23:20 GMT -->
+</html>

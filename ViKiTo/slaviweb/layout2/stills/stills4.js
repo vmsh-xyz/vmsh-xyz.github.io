@@ -1,0 +1,13 @@
+img = new Array(9);
+img[0] ="stills/marius.html";
+img[1] ="stills/desislava.html";
+img[2] ="stills/tess.jpg";
+img[3] ="stills/riton.html";
+img[4] ="stills/shkumbata.jpg";
+img[5] ="stills/elena_petrova2.jpg";
+img[6] ="stills/bond.jpg";
+img[7] ="stills/andrei_batashov.jpg";
+img[8] ="stills/georgi_mamalev.html";
+img[9] ="stills/ypsurt.jpg";
+img[10] ="stills/alice_deejay.jpg";
+document.stills4.src = img[parseInt(Math.round(Math.random()*10))];
