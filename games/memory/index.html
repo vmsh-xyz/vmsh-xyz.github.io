@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="../../img/favicon.png" />
+    <title>Kukerche Memory Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 10px;
+        }
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden; /* Ensures images don't overflow the card */
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the card without distortion */
+            display: none; /* Initially hide the image */
+        }
+        .flipped img {
+            display: block; /* Show the image when the card is flipped */
+        }
+        .flipped::before {
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kukerche Memory Game</h1>
+    <div class="grid" id="grid"></div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const cardImages = [
+            'image1.png', 'image1.png',
+            'image2.png', 'image2.png',
+            'image3.png', 'image3.png',
+            'image4.png', 'image4.png',
+            'image5.png', 'image5.png',
+            'image6.png', 'image6.png',
+            'image7.png', 'image7.png',
+            'image8.png', 'image8.png'
+        ];
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+
+        function shuffle(array) {
+            array.sort(() => Math.random() - 0.5);
+        }
+
+        function createCard(image) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.addEventListener('click', flipCard);
+
+            const img = document.createElement('img');
+            img.src = image;
+            card.appendChild(img);
+
+            return card;
+        }
+
+        function flipCard() {
+            if (lockBoard) return;
+            this.classList.add('flipped');
+
+            const img = this.querySelector('img');
+            img.style.display = 'block'; // Show the image when the card is flipped
+
+            if (!firstCard) {
+                firstCard = this;
+            } else {
+                secondCard = this;
+                lockBoard = true;
+                checkForMatch();
+            }
+        }
+
+        function checkForMatch() {
+            if (firstCard.querySelector('img').src === secondCard.querySelector('img').src) {
+                resetBoard();
+            } else {
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped');
+                    firstCard.querySelector('img').style.display = 'none'; // Hide the image again
+                    secondCard.classList.remove('flipped');
+                    secondCard.querySelector('img').style.display = 'none'; // Hide the image again
+                    resetBoard();
+                }, 1000);
+            }
+        }
+
+        function resetBoard() {
+            [firstCard, secondCard] = [null, null];
+            lockBoard = false;
+        }
+
+        function setupGame() {
+            shuffle(cardImages);
+            cardImages.forEach(image => {
+                const card = createCard(image);
+                grid.appendChild(card);
+            });
+        }
+
+        setupGame();
+    </script>
+</body>
+</html>
