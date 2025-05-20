@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Button Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select an Option</h1>
+    <div>
+        <label>
+            <input type="radio" name="option" value="option1" checked> Option 1
+        </label>
+        <label>
+            <input type="radio" name="option" value="option2"> Option 2
+        </label>
+    </div>
+    <div class="message" id="message">You selected Option 1</div>
+
+    <script>
+        const messageDiv = document.getElementById('message');
+        const radioButtons = document.querySelectorAll('input[name="option"]');
+
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'option1') {
+                    messageDiv.textContent = 'You selected Option 1';
+                    // Additional actions for Option 1 can be added here
+                } else if (radio.value === 'option2') {
+                    messageDiv.textContent = 'You selected Option 2';
+                    // Additional actions for Option 2 can be added here
+                }
+            });
+        });
+    </script>
+</body>
+</html>

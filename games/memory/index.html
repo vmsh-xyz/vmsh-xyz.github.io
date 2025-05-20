@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" href="../../img/favicon.png" />
-    <title>Kukerche Memory Game</title>
+    <title>vmsh.xyz - KukercheArt - Kukerche Memory Game</title>
     <style>
         body {
             display: flex;
@@ -38,9 +38,6 @@
             object-fit: cover; /* Ensures the image covers the card without distortion */
             display: none; /* Initially hide the image */
         }
-        .flipped img {
-            display: block; /* Show the image when the card is flipped */
-        }
         .flipped::before {
             background-color: #fff;
             position: absolute;
@@ -54,20 +51,43 @@
 </head>
 <body>
     <h1>Kukerche Memory Game</h1>
+	<h3><a href="index.html?set=1">Set 1</a> | <a href="index.html?set=2">Set 2</a></h3>	
     <div class="grid" id="grid"></div>
 
     <script>
+        // Function to get URL parameters
+        function getParameterByName(name) {
+            const url = window.location.href;
+            name = name.replace(/[$$$$]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
         const grid = document.getElementById('grid');
-        const cardImages = [
-            'image1.png', 'image1.png',
-            'image2.png', 'image2.png',
-            'image3.png', 'image3.png',
-            'image4.png', 'image4.png',
-            'image5.png', 'image5.png',
-            'image6.png', 'image6.png',
-            'image7.png', 'image7.png',
-            'image8.png', 'image8.png'
+        const cardImagesSet1 = [
+            '1.png', '1.png',
+            '2.png', '2.png',
+            '3.png', '3.png',
+            '4.png', '4.png',
+            '5.png', '5.png',
+            '6.png', '6.png',
+            '7.png', '7.png',
+            '8.png', '8.png'
         ];
+        const cardImagesSet2 = [
+            '9.png', '9.png',
+            '10.png', '10.png',
+            '11.png', '11.png',
+            '12.png', '12.png',
+            '13.png', '13.png',
+            '14.png', '14.png',
+            '15.png', '15.png',
+            '16.png', '16.png'
+        ];
+		const radioButtons = document.querySelectorAll('input[name="imageSet"]');
         let firstCard = null;
         let secondCard = null;
         let lockBoard = false;
@@ -123,7 +143,15 @@
             lockBoard = false;
         }
 
-        function setupGame() {
+        function setupGame(s) {
+			var cardImages = cardImagesSet1;
+			
+			if (s === '1') {
+				cardImages = cardImagesSet1;
+			} else if (s === '2') {
+				cardImages = cardImagesSet2;
+			}
+			
             shuffle(cardImages);
             cardImages.forEach(image => {
                 const card = createCard(image);
@@ -131,7 +159,10 @@
             });
         }
 
-        setupGame();
+        // Get the 'set' parameter from the URL
+        const set = getParameterByName('set');
+
+        setupGame(set);
     </script>
 </body>
 </html>
