@@ -263,7 +263,7 @@ a.display));else{a.d.data.hide().remove();b.replaceWith(a.d.orig)}}else a.d.data
 				<option value="8">8</option>
 				<option value="9">9</option>
 				<option value="10">10</option>
-			</select> colors</label><br>
+			</select> kukercheta</label><br>
 			<label for="turns"><select name="turns" id="turns">
 				<option value="6">6</option>
 				<option value="8">8</option>
@@ -319,7 +319,7 @@ a.display));else{a.d.data.hide().remove();b.replaceWith(a.d.orig)}}else a.d.data
 		<ol>
 			<li>Select your settings
 				<ul>
-					<li>More pegs and/or more colors makes the game harder</li>
+					<li>More pegs and/or more kukercheta makes the game harder</li>
 					<li>Fewer turns makes the game harder</li>
 					<li>Duplicates make the game harder</li>
 					<li>Blanks make the game harder</li>
@@ -339,16 +339,16 @@ a.display));else{a.d.data.hide().remove();b.replaceWith(a.d.orig)}}else a.d.data
 				selected, even if this option is turned on.  (This option is
 				live, meaning if you turn it off or on midway through a game, it
 				will take effect immedately.)</li>
-			<li>When all the colors (or blanks) for the current row have been
+			<li>When all the kukercheta (or blanks) for the current row have been
 				placed, click on the result box (highlighted in red)</li>
 			<li>The game will return a set of pegs (if any) in the response
 				box:
 				<ul>
-					<li>A white peg means you got one of the colors correct,
+					<li>A white peg means you got one of the kukercheta correct,
 						but in the wrong position</li>
-					<li>A red peg means you got one of the colors correct,
+					<li>A red peg means you got one of the kukercheta correct,
 						and in the correct position</li>
-					<li>No pegs means that none of the colors shown is present
+					<li>No pegs means that none of the kukercheta shown is present
 						in the solution</li>
 					<li>The pegs are not cumulative.  i.e. if you place a blue
 						peg on the board and the solution contains two blue
@@ -522,7 +522,7 @@ a.display));else{a.d.data.hide().remove();b.replaceWith(a.d.orig)}}else a.d.data
 			case 1 :
 				alert('OK, you now have a game running.\n\n' +
 						'To place a piece, click on the color of the piece you\n' +
-						'wish to place from the selection of colors at the\n' +
+						'wish to place from the selection of kukercheta at the\n' +
 						'bottom of the game board.');
 				flashBox($('#choices div'));
 				NEXTHELP += 1;
@@ -574,7 +574,7 @@ a.display));else{a.d.data.hide().remove();b.replaceWith(a.d.orig)}}else a.d.data
 						'correct, but it is in the wrong location.\n\n' +
 						' -- A red peg means one of your code pegs is correct:\n' +
 						'right color and in the right location.\n\n' +
-						' -- No pegs means that none of the colors shown is used in\n' +
+						' -- No pegs means that none of the kukercheta shown is used in\n' +
 						'the solution.\n\n' +
 						'Continue playing until you either guess the code, or\n' +
 						'run out of turns.\n\n' +
@@ -1005,10 +1005,10 @@ a.display));else{a.d.data.hide().remove();b.replaceWith(a.d.orig)}}else a.d.data
 	FORM.newgame.onclick = function( ) {
 		// make sure our values are correct
 		if ( ! FORM.duplicates.checked && ! FORM.blanks.checked && (parseInt(FORM.pegs.value, 10) > parseInt(FORM.colors.value, 10))) {
-			alert('You CANNOT have more pegs than colors unless duplicates or blanks are allowed.\n\n' +
+			alert('You CANNOT have more pegs than kukercheta unless duplicates or blanks are allowed.\n\n' +
 					'Please do one of the following and try again:\n' +
 					'  - decrease the number of pegs\n' +
-					'  - increase the number of colors\n' +
+					'  - increase the number of kukercheta\n' +
 					'  - allow for duplicates\n' +
 					'  - allow for blanks');
 			return;
