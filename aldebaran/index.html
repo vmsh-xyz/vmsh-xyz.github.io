@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алдебаран - Проценти доверие</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --border: #334155;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .counter-display {
+            text-align: center;
+            width: 100%;
+        }
+
+        .counter-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .counter-value {
+            font-size: 6rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1.1;
+            margin: 10px 0 25px 0;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+        }
+
+        .status-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            min-height: 20px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .progress-bar-container {
+            background: rgba(51, 65, 85, 0.5);
+            border-radius: 9999px;
+            height: 6px;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            height: 100%;
+            width: 0%;
+            transition: width 0.2s linear;
+        }
+        
+        .start-date-info {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            border-top: 1px solid rgba(51, 65, 85, 0.5);
+            padding-top: 20px;
+            opacity: 0.8;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="counter-display">
+            <div class="counter-label">Натрупана стойност %</div>
+            <div class="counter-value" id="counterValue">100</div>
+            <!--<div class="status-text" id="statusText">Изчисляване...</div>-->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        <!--<div class="start-date-info">
+            Отчитане от: 28 юни 2026 г. <br> (Скорост: +1 на всеки час)
+        </div>-->
+    </div>
+
+    <script>
+        // Настройки
+        // В JavaScript месеците са от 0 до 11 (0 = Януари, 5 = Юни)
+        // Задаваме 28 Юни 2026, 00:00:00 ч.
+        const START_DATE = new Date(2026, 5, 28, 0, 0, 0).getTime(); 
+        const STEP = 53;
+        const INTERVAL_MS = 3600000; // 1 час в милисекунди (60 * 60 * 1000)
+
+        const counterValueEl = document.getElementById('counterValue');
+        const statusTextEl = document.getElementById('statusText');
+        const progressBarEl = document.getElementById('progressBar');
+
+        function updateCounter() {
+            const now = Date.now();
+            const elapsed = now - START_DATE;
+            
+            if (elapsed < 0) {
+                // Ако текущата дата е преди началната
+                counterValueEl.textContent = "0";
+                progressBarEl.style.width = "0%";
+                statusTextEl.textContent = "Изчакване на началната дата...";
+                return;
+            }
+
+            // Изчисляване на изминалите пълни интервали (часове)
+            const intervalsPassed = Math.floor(elapsed / INTERVAL_MS);
+            const currentCount = intervalsPassed * STEP;
+            
+            // Актуализиране на основния дисплей
+            counterValueEl.textContent = currentCount;
+            
+            // Изчисляване на прогреса в текущия интервал за визуализация в прогрес бар
+            const msIntoCurrentInterval = elapsed % INTERVAL_MS;
+            const progressPercent = (msIntoCurrentInterval / INTERVAL_MS) * 100;
+            progressBarEl.style.width = `${progressPercent}%`;
+            
+            // Изчисляване на оставащото време до следващото увеличение
+            const msLeft = INTERVAL_MS - msIntoCurrentInterval;
+            const secondsLeft = Math.floor(msLeft / 1000);
+            
+            const hours = Math.floor(secondsLeft / 3600);
+            const mins = Math.floor((secondsLeft % 3600) / 60);
+            const secs = secondsLeft % 60;
+            
+            // Форматиране с водещи нули за секундите и минутите
+            const formattedMins = mins.toString().padStart(2, '0');
+            const formattedSecs = secs.toString().padStart(2, '0');
+            
+            if (hours > 0) {
+                statusTextEl.textContent = `Следващо увеличение след: ${hours}ч ${formattedMins}м ${formattedSecs}с`;
+            } else {
+                statusTextEl.textContent = `Следващо увеличение след: ${formattedMins}м ${formattedSecs}с`;
+            }
+        }
+
+        // Опресняване всеки 200 милисекунди за гладко движение на бара и таймера
+        setInterval(updateCounter, 200);
+        
+        // Първоначално извикване, за да няма забавяне при зареждане
+        updateCounter();
+    </script>
+</body>
+</html>
