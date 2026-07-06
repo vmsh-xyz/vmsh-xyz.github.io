@@ -58,7 +58,7 @@
         }
 
         .counter-value {
-            font-size: 6rem;
+            font-size: clamp(3.0rem, 8vw, 9rem);
             font-weight: 800;
             color: var(--accent);
             line-height: 1.1;
@@ -166,12 +166,6 @@
             // Форматиране с водещи нули за секундите и минутите
             const formattedMins = mins.toString().padStart(2, '0');
             const formattedSecs = secs.toString().padStart(2, '0');
-            
-            if (hours > 0) {
-                statusTextEl.textContent = `Следващо увеличение след: ${hours}ч ${formattedMins}м ${formattedSecs}с`;
-            } else {
-                statusTextEl.textContent = `Следващо увеличение след: ${formattedMins}м ${formattedSecs}с`;
-            }
         }
 
         // Опресняване всеки 200 милисекунди за гладко движение на бара и таймера
