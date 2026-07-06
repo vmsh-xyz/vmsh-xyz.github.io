@@ -37,8 +37,7 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 40px;
-            width: 100%;
-            max-width: 420px;
+			width: max-content;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
@@ -125,7 +124,7 @@
         // В JavaScript месеците са от 0 до 11 (0 = Януари, 5 = Юни)
         // Задаваме 28 Юни 2026, 00:00:00 ч.
         const START_DATE = new Date(2026, 5, 28, 0, 0, 0).getTime(); 
-        const STEP = 53;
+        const STEP = 999999;
         const INTERVAL_MS = 3600000; // 1 час в милисекунди (60 * 60 * 1000)
 
         const counterValueEl = document.getElementById('counterValue');
