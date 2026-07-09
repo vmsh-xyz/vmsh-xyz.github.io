@@ -1,0 +1,194 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(images/background.png);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 1400px;
+  height: 500px;
+}
+
+.map {
+  position: absolute;
+  width: 200px;
+  height: 85px;
+  bottom: 400px;
+}
+
+.box {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  bottom: -70px;
+}
+
+.lid {
+  position: absolute;
+  width: 110%;
+  height: 100px ;
+  top: -50px;
+  left:-7px;
+  transform-origin: bottom left;
+  transition: transform 0.5s ease-out;
+}
+
+.box-base {
+  width: 100%;
+  height: 90%;
+}
+
+.map-base {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+.box.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+
+/* ========================= */
+
+
+
+/* Happy Birthday Balloon */
+.happy-balloon-box {
+  position: absolute;
+  width: 100%; 
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.happy-balloon {
+  width: 200px;
+  height: 200px; 
+  position: absolute;
+  bottom: -50px;
+  opacity: 0;
+}
+
+.happy-balloon.fly {
+  animation: slide-up 15s infinite ease-out forwards; 
+  opacity: 1; 
+}
+
+/* slide-up animation for Happy Birthday Balloon */
+@keyframes slide-up {
+  0% {
+    bottom: 0;
+    transform: scale(0) translateX(-100px) translateY(-150px);
+  }
+  50% {
+    transform: scale(1.5); 
+  }
+  100% {
+    bottom: 100vh;
+    transform: scale(1) translateX(100px); 
+  }
+}
+
+
+/* ====================== */
+
+
+/*  Balloons */
+.balloons {
+  position: relative;
+  display: none;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -450px;
+  right: 50px;
+  width: 100px;
+  height: auto;
+  animation: slideUp 20s infinite forwards;
+  transform: scale(0); 
+}
+
+/*  balloons with different directions */
+.balloon1 {
+  --x: -500px;
+  --xx:-300px;
+  animation-delay: 0s;
+}
+.balloon2 {
+  --x: 400px;
+  --xx:600px;
+  animation-delay: 0.5s;
+}
+.balloon3 {
+  --x: 500px;
+  --xx:800px;
+  animation-delay: 1s;
+}
+.balloon4 {
+  --x: 200px;
+  --xx:400px
+  animation-delay: 1.25s;
+}
+.balloon5 {
+  --x: -100px;
+  --xx:200px;
+  animation-delay: 1.5s;
+}
+.balloon6 {
+  --x: -300px;
+  --xx:500px;
+  animation-delay: 1.75s;
+}
+.balloon7 {
+  --x: 400px;
+  --xx:600px;
+  animation-delay: 2s;
+}
+
+/* animation for all balloons */
+@keyframes slideUp {
+  0% {
+    bottom: 0;
+    transform: scale(0) translateX(-200px); 
+  }
+  50% {
+    transform: scale(1.35) translateX(var(--x));
+  }
+  100% {
+    bottom: 100vh;
+    transform: scale(1.5) translateX(var(--xx));
+  }
+}
+
+

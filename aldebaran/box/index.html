@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surprise Box</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="images/icon.png" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Gift Box -->
+      <div class="box">
+        <img src="images/lid.png" alt="lid" class="lid" />
+        <img src="images/box.png" alt="box-base" class="box-base" />
+
+        <!-- Happy Birthday Balloon -->
+        <div class="happy-balloon-box">
+          <img
+            src="images/happy-birthday.png"
+            alt="Happy Birthday Balloon"
+            class="happy-balloon"
+          />
+        </div>
+      </div>
+
+
+      <!-- Balloons -->
+      <div class="balloons" id="balloons">
+        <img src="images/balloon1.png" alt="balloon" class="balloon balloon1" />
+        <img src="images/balloon2.png" alt="balloon" class="balloon balloon2" />
+        <img src="images/balloon3.png" alt="balloon" class="balloon balloon3" />
+        <img src="images/balloon4.png" alt="balloon" class="balloon balloon4" />
+        <img src="images/balloon5.png" alt="balloon" class="balloon balloon5" />
+        <img src="images/balloon6.png" alt="balloon" class="balloon balloon6" />
+        <a href="download.html"><img src="images/balloon7.png" alt="balloon" class="balloon balloon7" /></a>
+      </div>
+    </div>
+    </div>
+
+     <!-- Explosion Sound (for confetti) -->
+    <audio
+      id="explosion-sound"
+      src="audio/explosion.mp3"
+      preload="auto"
+    ></audio>
+
+    <!-- Birthday Music -->
+    <audio
+      id="birthday-music"
+      src="audio/happy-birthday.mp3"
+      preload="auto"
+      loop
+    ></audio>
+
+
+    <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  </body>
+</html>
