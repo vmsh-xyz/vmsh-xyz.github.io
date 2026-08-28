@@ -44,7 +44,7 @@
         input[type="email"]:focus, input[type="text"]:focus {
             border-color: #0ee239;
         }
-        .save-btn {
+        .action-btn {
             background-color: #1e1e1e;
             border: 1px solid #333333;
             border-radius: 4px;
@@ -55,12 +55,13 @@
             align-items: center;
             justify-content: center;
             transition: background-color 0.2s, border-color 0.2s;
+            flex-shrink: 0;
         }
-        .save-btn:hover {
+        .action-btn:hover {
             background-color: #2a2a2a;
             border-color: #0ee239;
         }
-        .save-btn svg {
+        .action-btn svg {
             width: 18px;
             height: 18px;
             fill: #0ee239;
@@ -71,19 +72,47 @@
             background-color: #1e1e1e;
             border-left: 4px solid #0ee239;
             border-radius: 0 4px 4px 0;
-            word-break: break-all;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
         }
         .result-title {
             color: #a0a0a0;
             font-size: 0.9em;
-            margin-bottom: 6px;
-            display: block;
+        }
+        .result-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
         }
         .result-text {
             font-family: monospace;
             font-size: 1.1em;
             color: #0ee239;
             margin: 0;
+            word-break: break-all;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0ee239;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .toast.show {
+            opacity: 1;
         }
     </style>
 </head>
@@ -95,7 +124,7 @@
         <label for="myEmail">Моят имейл:</label>
         <div class="input-wrapper">
             <input type="email" id="myEmail" placeholder="your@duck.com" oninput="generateAddress()">
-            <button type="button" class="save-btn" onclick="saveEmail()" title="Запази имейла в браузъра">
+            <button type="button" class="action-btn" onclick="saveEmail()" title="Запази имейла в браузъра">
                 <svg viewBox="0 0 24 24">
                     <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
                 </svg>
@@ -109,9 +138,20 @@
     </div>
 
     <div class="result-box">
-        <span class="result-title">Форматиран адрес за изпращане:</span>
-        <p id="formattedOutput" class="result-text">---</p>
+        <div class="result-header">
+            <span class="result-title">Форматиран адрес за изпращане:</span>
+        </div>
+        <div class="result-content">
+            <p id="formattedOutput" class="result-text">---</p>
+            <button type="button" class="action-btn" onclick="copyToClipboard()" title="Копирай в клипборда">
+                <svg viewBox="0 0 24 24">
+                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                </svg>
+            </button>
+        </div>
     </div>
+
+    <div id="toast" class="toast">Копирано в клипборда!</div>
 
     <script>
         // Зареждане на запазения имейл при отваряне на страницата
@@ -128,10 +168,10 @@
             const myEmail = document.getElementById('myEmail').value.trim();
             if (myEmail) {
                 localStorage.setItem('ddg_my_email', myEmail);
-                alert('Имейлът е запазен успешно!');
+                showToast('Имейлът е запазен успешно!');
             } else {
                 localStorage.removeItem('ddg_my_email');
-                alert('Полето е празно. Запазената стойност беше изтрита.');
+                showToast('Запазената стойност беше изтрита.');
             }
         }
 
@@ -151,6 +191,29 @@
             const finalAddress = `${formattedTo}_${myUsername}@duck.com`;
 
             outputElement.textContent = finalAddress;
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('formattedOutput').textContent.trim();
+            if (!outputText || outputText === '---') {
+                showToast('Няма генериран адрес за копиране.');
+                return;
+            }
+
+            navigator.clipboard.writeText(outputText).then(() => {
+                showToast('Копирано в клипборда!');
+            }).catch(err => {
+                showToast('Грешка при копиране.');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
         }
     </script>
 
