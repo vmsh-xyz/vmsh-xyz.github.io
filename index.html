@@ -82,32 +82,43 @@
       filter: invert(0%);
     }
   </style>
-</head>
-
-<body>
   <script>
     function toggleTheme() {
       const isLight = document.body.classList.toggle('light-theme');
-      const btnIcon = document.getElementById('btnIcon');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      renderButton(isLight);
+    }
+
+    function renderButton(isLight) {
+      const btn = document.getElementById('themeBtn');
+      if (!btn) return;
 
       if (isLight) {
-        btnIcon.textContent = '🌙';
-        btnIcon.className = '';
+        btn.innerHTML = '🌙';
       } else {
-        btnIcon.textContent = '☀️';
-        btnIcon.className = 'sun-icon';
+        btn.innerHTML = '<span class="sun-icon">☀️</span>';
       }
     }
-  </script>
 
+    document.addEventListener('DOMContentLoaded', function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        renderButton(true);
+      } else {
+        renderButton(false);
+      }
+    });
+  </script>
+</head>
+
+<body>
 
   <img src="img/header.png" width="100%">
 
   <div class="content">
     <h1>&nbsp;</h1>
-    <button id="themeBtn" class="theme-btn" onclick="toggleTheme()">
-      <span id="btnIcon" class="sun-icon">☀️</span>
-    </button>
+    <button id="themeBtn" class="theme-btn" onclick="toggleTheme()"></button>
     <h1>Hello, World!</h1>
     <h2>This is vmsh, МАШ, Vicky or Victoria Masheva.<br>I am an artechie woman...</h2>
     <br>
