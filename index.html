@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="inverted">
+<html lang="en">
 
 <head>
   <title>vmsh.xyz</title>
@@ -8,31 +8,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="me" href="https://social.vivaldi.net/@vmsh">
   <style>
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-    }
-
-    html.dark-theme {
-      --bg-color: #000000;
-      --text-color: #ffffff;
-    }
-
     html,
     body {
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: #ffffff;
+      color: #000000;
       transition: filter 0.3s ease;
     }
 
-    html.inverted {
+    body.inverted {
       filter: invert(100%);
     }
 
-    html.inverted .icon-emoji {
+    body.inverted .icon-emoji {
       filter: invert(100%);
       display: inline-block;
     }
@@ -48,52 +38,28 @@
       cursor: pointer;
       border: 2px solid #000000;
       border-radius: 30px;
-      background-color: #f0f0f0;
       transition: all 0.2s ease;
       margin-bottom: 20px;
     }
-
-    a:link {
-      color: #0000ee;
-    }
-
-    a:visited {
-      color: #551a8b;
-    }
-
-
-    html.dark-theme a:link {
-      color: #ffff11;
-    }
-
-    html.dark-theme a:visited {
-      color: #aae574;
-    }
   </style>
+</head>
+
+<body class="inverted">
   <script>
     function toggleTheme() {
       const htmlElement = document.documentElement;
-      const btnText = document.getElementById('btnText');
       const btnIcon = document.getElementById('btnIcon');
 
-      const isInverted = htmlElement.classList.toggle('inverted');
+      const isInverted = document.body.classList.toggle('inverted');
 
       if (isInverted) {
         btnIcon.textContent = '☀️';
       } else {
         btnIcon.textContent = '🌙';
       }
-
-      document.querySelectorAll('a').forEach(link => {
-        link.style.display = 'none';
-        link.offsetHeight;
-        link.style.display = '';
-      });
     }
   </script>
-</head>
 
-<body>
 
   <img src="img/header.png" width="100%">
 
