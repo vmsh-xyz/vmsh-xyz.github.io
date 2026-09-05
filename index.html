@@ -83,6 +83,12 @@
       } else {
         btnIcon.textContent = '🌙';
       }
+
+      document.querySelectorAll('a').forEach(link => {
+        link.style.display = 'none';
+        link.offsetHeight;
+        link.style.display = '';
+      });
     }
   </script>
 </head>
