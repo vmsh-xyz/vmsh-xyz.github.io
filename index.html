@@ -13,18 +13,29 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      background-color: #ffffff;
-      color: #000000;
+      background-color: #000000;
+      color: #ffffff;
       transition: filter 0.3s ease;
     }
 
-    body.inverted {
-      filter: invert(100%);
+    a:link {
+      color: #ffff11;
     }
 
-    body.inverted .icon-emoji {
+    a:visited {
+      color: #aae574;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
       filter: invert(100%);
+      transition: filter 0.2s ease;
+    }
+
+    .sun-icon {
       display: inline-block;
+      filter: invert(0%);
     }
 
     .content {
@@ -33,29 +44,58 @@
     }
 
     .theme-btn {
-      padding: 12px 12px;
+      padding: 9px 9px;
+      background-color: #ffffff;
+      border: 0;
       font-size: 16px;
       cursor: pointer;
-      border: 2px solid #000000;
       border-radius: 30px;
       transition: all 0.2s ease;
       margin-bottom: 20px;
     }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      filter: invert(100%);
+      transition: filter 0.2s ease;
+    }
+
+    body.light-theme {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    body.light-theme a:link {
+      color: #0000ee;
+    }
+
+    body.light-theme a:visited {
+      color: #551a8b;
+    }
+
+    body.light-theme .theme-btn {
+      background-color: #000000;
+    }
+
+    body.light-theme img {
+      filter: invert(0%);
+    }
   </style>
 </head>
 
-<body class="inverted">
+<body>
   <script>
     function toggleTheme() {
-      const htmlElement = document.documentElement;
+      const isLight = document.body.classList.toggle('light-theme');
       const btnIcon = document.getElementById('btnIcon');
 
-      const isInverted = document.body.classList.toggle('inverted');
-
-      if (isInverted) {
-        btnIcon.textContent = '☀️';
-      } else {
+      if (isLight) {
         btnIcon.textContent = '🌙';
+        btnIcon.className = '';
+      } else {
+        btnIcon.textContent = '☀️';
+        btnIcon.className = 'sun-icon';
       }
     }
   </script>
@@ -66,7 +106,7 @@
   <div class="content">
     <h1>&nbsp;</h1>
     <button id="themeBtn" class="theme-btn" onclick="toggleTheme()">
-      <span id="btnIcon" class="icon-emoji">☀️</span>
+      <span id="btnIcon" class="sun-icon">☀️</span>
     </button>
     <h1>Hello, World!</h1>
     <h2>This is vmsh, МАШ, Vicky or Victoria Masheva.<br>I am an artechie woman...</h2>
