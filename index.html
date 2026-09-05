@@ -8,13 +8,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="me" href="https://social.vivaldi.net/@vmsh">
   <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --link-color: #0000ee;
+      --visited-color: #551a8b;
+    }
+
+    html.dark-theme {
+      --bg-color: #000000;
+      --text-color: #ffffff;
+      --link-color: #ffff11;
+      --visited-color: #aae574;
+    }
+
     html,
     body {
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      background-color: #ffffff;
-      color: #000000;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       transition: filter 0.3s ease;
     }
 
@@ -41,6 +55,14 @@
       background-color: #f0f0f0;
       transition: all 0.2s ease;
       margin-bottom: 20px;
+    }
+
+    a:link {
+      color: var(--link-color);
+    }
+
+    a:visited {
+      color: var(--visited-color) !important;
     }
   </style>
   <script>
