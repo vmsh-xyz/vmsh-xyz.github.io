@@ -11,15 +11,11 @@
     :root {
       --bg-color: #ffffff;
       --text-color: #000000;
-      --link-color: #0000ee;
-      --visited-color: #551a8b;
     }
 
     html.dark-theme {
       --bg-color: #000000;
       --text-color: #ffffff;
-      --link-color: #ffff11;
-      --visited-color: #aae574;
     }
 
     html,
@@ -58,11 +54,20 @@
     }
 
     a:link {
-      color: var(--link-color);
+      color: #0000ee;
     }
 
     a:visited {
-      color: var(--visited-color) !important;
+      color: #551a8b;
+    }
+
+
+    html.dark-theme a:link {
+      color: #ffff11;
+    }
+
+    html.dark-theme a:visited {
+      color: #aae574;
     }
   </style>
   <script>
