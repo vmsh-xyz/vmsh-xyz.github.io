@@ -1,0 +1,28 @@
+/* 
+Check these with the color contrast checker:
+https://www.accessibilitychecker.org/color-contrast-checker/
+*/
+
+:root {
+  /* Backgrounds */
+  --main-bg-color: #000000;
+  --code-bg-color: #222222;
+
+  /* Foregrounds */
+  --main-text-color: #bbbbbb;
+  --link-text-color: #22A7F0;
+  --visited-link-color: #7462E0;
+}
+
+body
+{
+	background-color: var(--main-bg-color) !important;
+  text-align: center;
+}
+
+canvas{
+    padding: 0;
+    margin: 0;
+}
+
+
