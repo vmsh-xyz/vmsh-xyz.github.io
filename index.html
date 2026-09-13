@@ -43,7 +43,6 @@
       cursor: pointer;
       border-radius: 30px;
       transition: all 0.2s ease;
-      margin-bottom: 20px;
     }
 
     img {
@@ -83,12 +82,15 @@
 
     function renderButton(isLight) {
       const btn = document.getElementById('themeBtn');
-      if (!btn) return;
+      const btn2 = document.getElementById('themeBtn2');
+      if (!btn || !btn2) return;
 
       if (isLight) {
         btn.innerHTML = '🌙';
+        btn2.innerHTML = '➖';
       } else {
         btn.innerHTML = '<span class="sun-icon">☀️</span>';
+        btn2.innerHTML = '<span class="sun-icon">➕</span>';
       }
     }
 
@@ -106,7 +108,7 @@
 
 <body>
 
-  <img src="img/header.png" width="100%">
+  <img src="img/footer.png" width="100%">
 
   <div class="content">
     <h1>&nbsp;</h1>
@@ -297,7 +299,12 @@
     <h1>&nbsp;</h1>
   </div>
 
-  <img src="img/footer.png" width="100%">
+  <img src="img/header.png" width="100%">
+
+  <div class="content">
+    <button id="themeBtn2" class="theme-btn" onclick="toggleTheme()"></button>
+  </div>
+  <img src="img/vmsh.jpg" width="100%">
 
 </body>
 
